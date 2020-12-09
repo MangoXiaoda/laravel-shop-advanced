@@ -6,11 +6,14 @@ use App\Events\OrderReviewed;
 use App\Exceptions\CouponCodeUnavailableException;
 use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\ApplyRefundRequest;
+use App\Http\Requests\CrowdfundingOrderRequest;
 use App\Http\Requests\OrderRequest;
 use App\Http\Requests\SendReviewRequest;
 use App\Models\CouponCode;
+use App\Models\CrowdfundingProduct;
 use App\Models\UserAddress;
 use App\Models\Order;
+use App\Models\ProductSku;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Services\OrderService;
@@ -136,4 +139,16 @@ class OrdersController extends Controller
 
         return $order;
     }
+
+    // 众筹商品下单逻辑
+    public function crowdfunding(CrowdfundingOrderRequest $request, OrderService $orderService)
+    {   
+        $user = $request->user();
+        $sku = ProductSku::find($request->input('sku_id'));
+        $address = UserAddress::find($request->input('address_id'));
+        $amount = $request->input('amount');
+
+        return $orderService->crowdfunding($user, $address, $sku, $amount);
+    }
+
 }
