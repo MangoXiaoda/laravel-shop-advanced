@@ -123,6 +123,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'ngrok_url' => env('NGROK_URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
