@@ -47,6 +47,9 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 
     // 众筹商品下单路由
     Route::post('crowdfunding_orders', 'OrdersController@crowdfunding')->name('crowdfunding_orders.store');
+
+    // 分期付款路由
+    Route::post('payment/{order}/installment', 'PaymentController@payByInstallment')->name('payment.installment');
 });
 
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
