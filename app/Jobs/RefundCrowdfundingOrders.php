@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\CrowdfundingProduct;
 use App\Models\Order;
+use App\Services\OrderService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -39,7 +40,7 @@ class RefundCrowdfundingOrders implements ShouldQueue
         }
 
         // 查询出所有参与了此众筹的订单
-        $orderService = app(OrderService::class);
+        $orderService = new OrderService();
         Order::query()
             // 订单类型为众筹商品订单
             ->where('type', Order::TYPE_CROWDFUNDING)

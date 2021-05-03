@@ -52,10 +52,10 @@ class FinishCrowdfunding extends Command
                 // 如果众筹目标金额大于实际目标金额
                 if ($crowdfunding->target_amount > $crowdfunding->total_amount) {
                     // 调用众筹失败逻辑
-                    $this->crowdfundingFailed();
+                    $this->crowdfundingFailed($crowdfunding);
                 } else {    
                     // 调用众筹成功逻辑
-                    $this->crowdfundingSucceed();
+                    $this->crowdfundingSucceed($crowdfunding);
                 }
             });
     }
